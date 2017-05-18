@@ -3,4 +3,10 @@
     <string name="exercicio_1">Exercício 1</string>
     <string name="exercicio_2">Exercício 2</string>
     <string name="exercicio_3">Exercício 3</string>
+    <string name="acessar">Acessar</string>
+    <string name="senha">Senha</string>
+    <string name="email">Ex: djbdajdjes@esdeed.com</string>
+    <string name="relativo">Relativo</string>
+    <string name="usuarioIncorreto">Verifique o usuário</string>
+    <string name="asterisco">*</string>
 </resources>

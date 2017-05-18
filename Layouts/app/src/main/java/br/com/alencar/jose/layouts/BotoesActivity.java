@@ -27,4 +27,9 @@ public class BotoesActivity extends AppCompatActivity {
         Intent i = new Intent(this, Exercicio3Activity.class);
         startActivity(i);
     }
+
+    public void redirecionarRelativo(View view) {
+        Intent i = new Intent(this, RelativoActivity.class);
+        startActivity(i);
+    }
 }

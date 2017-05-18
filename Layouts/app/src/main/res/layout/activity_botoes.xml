@@ -22,4 +22,10 @@
         android:layout_height="wrap_content"
         android:text="@string/exercicio_3"
         android:onClick="redirecionarExercicio3"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/relativo"
+        android:onClick="redirecionarRelativo"/>
 </LinearLayout>
