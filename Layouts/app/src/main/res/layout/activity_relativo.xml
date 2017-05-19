@@ -79,5 +79,14 @@
             android:gravity="center"
             android:textColor="@color/vermelho"
             android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tvCredenciaisInvalidas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/credenciaisInvalidas"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/vermelho"
+            android:visibility="gone"/>
     </LinearLayout>
 </RelativeLayout>
