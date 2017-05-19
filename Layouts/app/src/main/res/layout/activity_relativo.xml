@@ -89,4 +89,13 @@
             android:textColor="@color/vermelho"
             android:visibility="gone"/>
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAcessar"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/azul"
+        android:layout_marginTop="15dp"
+        android:onClick="cadastrar"
+        android:text="@string/signup"/>
 </RelativeLayout>

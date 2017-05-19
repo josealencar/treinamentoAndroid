@@ -17,7 +17,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        String usuario = i.getStringExtra("usuario");
+        String usuario = i.getStringExtra(StorageUsuario.CHAVE_USUARIO);
         Calendar date = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String dataFormatada = format.format(date.getTime());

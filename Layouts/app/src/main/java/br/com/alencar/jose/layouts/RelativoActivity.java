@@ -9,17 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class RelativoActivity extends AppCompatActivity {
-
-    private List<String> credenciais = Arrays.asList(
-        "jose_alencar_1403@hotmail.com:zaq123",
-        "jose@gmail.com:google",
-        "padrao@admin.com:qwe",
-        "teste@teste.com:123"
-    );
 
     private TextView tvUsuarioIncorreto;
     private TextView tvEmptyEmail;
@@ -85,16 +75,13 @@ public class RelativoActivity extends AppCompatActivity {
             return;
         }
 
-        for (String credencial : credenciais) {
-            if (credencial.equals(txtEmail + ":" + txtPassword)) {
-                Intent i = new Intent(this, UsuarioActivity.class);
-                i.putExtra("usuario", txtEmail);
-                startActivity(i);
-                return;
-            }
+        if (StorageUsuario.loginCorreto(txtEmail, txtPassword)) {
+            Intent i = new Intent(this, UsuarioActivity.class);
+            i.putExtra(StorageUsuario.CHAVE_USUARIO, txtEmail);
+            startActivity(i);
+            return;
         }
         tvCredenciaisInvalidas.setVisibility(View.VISIBLE);
-
     }
 
     private void setFocus(View view) {
@@ -135,5 +122,10 @@ public class RelativoActivity extends AppCompatActivity {
 
     private boolean isEmailValido(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public void cadastrar(View view) {
+        Intent i = new Intent(this, SignUpActivity.class);
+        startActivity(i);
     }
 }

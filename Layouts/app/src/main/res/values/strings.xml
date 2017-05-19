@@ -10,4 +10,12 @@
     <string name="usuarioIncorreto">Verifique o usuário</string>
     <string name="asterisco">*</string>
     <string name="credenciaisInvalidas">Credenciais Inválidas</string>
+    <string name="signup"><u>Não possuo cadastro</u></string>
+    <string name="receberNotificacoes">Desejo receber novidades</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="confirmaSenha">Confirmar Senha</string>
+    <string name="usuarioExistente">Usuário já existe!</string>
+    <string name="tamanhoMinimoSenha">A senha deve ter pelo menos 6 dígitos.</string>
+    <string name="senhaEConfirmaSenhaDivergentes">Senha e Confirmação de Senha diferentes.</string>
+    <string name="usuarioObrigatorio">Campo usuário deve ser informado</string>
 </resources>

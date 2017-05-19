@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RelativoActivity" />
-        <activity android:name=".UsuarioActivity"></activity>
+        <activity android:name=".UsuarioActivity" />
+        <activity android:name=".SignUpActivity" android:noHistory="true" />
     </application>
 
 </manifest>
