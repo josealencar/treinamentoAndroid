@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import br.com.alencar.jose.mygames.adapters.GamesAdapter;
 import br.com.alencar.jose.mygames.models.Game;
 import br.com.alencar.jose.mygames.models.GameList;
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private void initComponents() {
         myGamesList = (ListView) findViewById(R.id.my_games_list);
 
-        ArrayAdapter<Game> adapter = new ArrayAdapter<Game>(this, android.R.layout.simple_list_item_1, GameList.getAll());
+        GamesAdapter adapter = new GamesAdapter(GameList.getAll(), this);
 
         myGamesList.setAdapter(adapter);
     }
