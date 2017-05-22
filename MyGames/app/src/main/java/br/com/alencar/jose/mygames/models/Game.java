@@ -1,14 +1,14 @@
 package br.com.alencar.jose.mygames.models;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by jose on 22/05/17.
  */
 
-public class Game {
+public class Game implements Serializable {
     private String nome;
     private Calendar dataLancamento;
     private String urlImage;

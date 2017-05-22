@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyGames</string>
+    <string name="pref_detalhe_data">Data Lançamento - </string>
+    <string name="pref_detalhe_nome">Nome: </string>
 </resources>
