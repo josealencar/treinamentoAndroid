@@ -28,6 +28,7 @@ public class DetalheActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         game = (Game) i.getSerializableExtra(Contants.CHAVE_GAME);
+        setTitle(game.getNome());
 
         popView();
     }
@@ -35,7 +36,7 @@ public class DetalheActivity extends AppCompatActivity {
     private void popView() {
         tvName.setText(getResources().getString(R.string.pref_detalhe_nome) + game.getNome());
         tvDate.setText(getResources().getString(R.string.pref_detalhe_data) + game.getDataFormatada());
-        tvDescription.setText(null);
+        tvDescription.setText(game.getDescricao());
         Picasso.with(this).load(game.getUrlImage()).into(ivImage);
     }
 

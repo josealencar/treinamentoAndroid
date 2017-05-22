@@ -12,11 +12,19 @@ public class Game implements Serializable {
     private String nome;
     private Calendar dataLancamento;
     private String urlImage;
+    private String descricao;
 
     public Game(String nome, Calendar dataLancamento, String urlImage) {
         this.nome = nome;
         this.dataLancamento = dataLancamento;
         this.urlImage = urlImage;
+    }
+
+    public Game(String nome, Calendar dataLancamento, String urlImage, String descricao) {
+        this.nome = nome;
+        this.dataLancamento = dataLancamento;
+        this.urlImage = urlImage;
+        this.descricao = descricao;
     }
 
     public String getNome() {
@@ -29,6 +37,10 @@ public class Game implements Serializable {
 
     public String getUrlImage() {
         return urlImage;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     public String getDataFormatada() {
