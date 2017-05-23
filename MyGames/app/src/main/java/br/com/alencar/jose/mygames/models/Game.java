@@ -21,11 +21,11 @@ public class Game implements Serializable {
         this.urlImage = urlImage;
     }
 
-    public Game(String nome, Calendar dataLancamento, String urlImage, String descricao) {
+    public Game(String nome, Calendar dataLancamento, String urlImage, boolean favorito) {
         this.nome = nome;
         this.dataLancamento = dataLancamento;
         this.urlImage = urlImage;
-        this.descricao = descricao;
+        this.favorito = favorito;
     }
 
     public String getNome() {

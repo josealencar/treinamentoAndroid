@@ -1,10 +1,12 @@
 package br.com.alencar.jose.mygames;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,18 +32,26 @@ public class DetalheActivity extends AppCompatActivity {
     private TextView tvDate;
     private TextView tvDescription;
 
+    private GameList gameList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhe);
 
         initComponents();
+        initData();
 
         Intent i = getIntent();
         game = (Game) i.getSerializableExtra(Contants.CHAVE_GAME);
         setTitle(game.getNome());
 
         popView();
+    }
+
+    private void initData() {
+        SharedPreferences preferences = getSharedPreferences(Contants.ARQUIVO_PREFERENCIAS, MODE_PRIVATE);
+        gameList = new GameList(preferences);
     }
 
     private void popView() {
@@ -87,20 +97,16 @@ public class DetalheActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        GameList.update(game);
-        super.onStop();
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_to_favorite:
                 game.setFavorito(true);
+                gameList.update(game);
                 invalidateOptionsMenu();
                 return true;
             case R.id.item_favorite:
                 game.setFavorito(false);
+                gameList.update(game);
                 invalidateOptionsMenu();
                 return true;
             default:
