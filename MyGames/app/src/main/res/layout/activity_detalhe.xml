@@ -7,26 +7,38 @@
     android:orientation="vertical"
     tools:context="br.com.alencar.jose.mygames.DetalheActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_detail"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="@dimen/elevation_default"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <ImageView
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"/>
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
     <TextView
         android:id="@+id/tv_name_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:textSize="@dimen/default_dim"
         android:gravity="center"
         android:layout_weight="1"/>
     <TextView
         android:id="@+id/tv_date_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:textSize="@dimen/default_dim"
         android:gravity="center"
         android:layout_weight="1"/>
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.8"/>
+        android:layout_height="0dp"
+        android:textSize="@dimen/default_dim"
+        android:layout_weight="3"/>
 </LinearLayout>

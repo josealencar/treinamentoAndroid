@@ -38,4 +38,8 @@ public class GameList {
     public static List<Game> getAll() {
         return games;
     }
+
+    public static void remove(int position) {
+        games.remove(position);
+    }
 }

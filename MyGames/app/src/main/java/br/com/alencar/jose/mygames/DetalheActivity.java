@@ -3,8 +3,18 @@ package br.com.alencar.jose.mygames;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ActionMenuItemView;
+import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +28,8 @@ public class DetalheActivity extends AppCompatActivity {
     private TextView tvName;
     private TextView tvDate;
     private TextView tvDescription;
+
+    private boolean favoritar = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +53,53 @@ public class DetalheActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.tb_detail);
+        setSupportActionBar(myToolbar);
+
         ivImage = (ImageView) findViewById(R.id.iv_image);
         tvName = (TextView) findViewById(R.id.tv_name_detail);
         tvDate = (TextView) findViewById(R.id.tv_date_detail);
         tvDescription = (TextView) findViewById(R.id.tv_description);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+
+        menuInflater.inflate(R.menu.detail_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem favorite = menu.findItem(R.id.item_favorite);
+        MenuItem toFavorite = menu.findItem(R.id.item_to_favorite);
+        favorite.setVisible(false);
+        toFavorite.setVisible(false);
+
+        if (favoritar) {
+            toFavorite.setVisible(true);
+        } else {
+            favorite.setVisible(true);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_to_favorite:
+                favoritar = false;
+                invalidateOptionsMenu();
+                return true;
+            case R.id.item_favorite:
+                favoritar = true;
+                invalidateOptionsMenu();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
