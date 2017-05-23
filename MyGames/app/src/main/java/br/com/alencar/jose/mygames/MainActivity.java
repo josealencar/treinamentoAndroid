@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import br.com.alencar.jose.mygames.utils.Contants;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "Log";
     private ListView myGamesList;
 
     @Override
@@ -29,6 +31,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initComponents();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "Passou no onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "Passou no onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d(TAG, "Passou no onStop");
+        super.onStop();
     }
 
     private void initComponents() {

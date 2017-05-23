@@ -42,4 +42,23 @@ public class GameList {
     public static void remove(int position) {
         games.remove(position);
     }
+
+    public static void update(Game game) {
+        for (Game g : games) {
+            if (g.getNome().equals(game.getNome())) {
+                g.setFavorito(game.isFavorito());
+                break;
+            }
+        }
+    }
+
+    public String getCSV() {
+        StringBuilder builder = new StringBuilder();
+
+        for (Game game : games) {
+            builder.append(game.getCSV() + "\n");
+        }
+
+        return builder.toString();
+    }
 }

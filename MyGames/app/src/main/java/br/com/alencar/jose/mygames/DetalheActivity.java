@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import br.com.alencar.jose.mygames.models.Game;
+import br.com.alencar.jose.mygames.models.GameList;
 import br.com.alencar.jose.mygames.utils.Contants;
 
 public class DetalheActivity extends AppCompatActivity {
@@ -28,8 +29,6 @@ public class DetalheActivity extends AppCompatActivity {
     private TextView tvName;
     private TextView tvDate;
     private TextView tvDescription;
-
-    private boolean favoritar = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,24 +77,30 @@ public class DetalheActivity extends AppCompatActivity {
         favorite.setVisible(false);
         toFavorite.setVisible(false);
 
-        if (favoritar) {
-            toFavorite.setVisible(true);
-        } else {
+        if (game.isFavorito()) {
             favorite.setVisible(true);
+        } else {
+            toFavorite.setVisible(true);
         }
 
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
+    protected void onStop() {
+        GameList.update(game);
+        super.onStop();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_to_favorite:
-                favoritar = false;
+                game.setFavorito(true);
                 invalidateOptionsMenu();
                 return true;
             case R.id.item_favorite:
-                favoritar = true;
+                game.setFavorito(false);
                 invalidateOptionsMenu();
                 return true;
             default:

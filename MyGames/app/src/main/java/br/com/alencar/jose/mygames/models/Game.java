@@ -13,6 +13,7 @@ public class Game implements Serializable {
     private Calendar dataLancamento;
     private String urlImage;
     private String descricao;
+    private boolean favorito;
 
     public Game(String nome, Calendar dataLancamento, String urlImage) {
         this.nome = nome;
@@ -43,12 +44,24 @@ public class Game implements Serializable {
         return descricao;
     }
 
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
+    }
+
     public String getDataFormatada() {
         if (getDataLancamento() == null) {
             return "Data não informada";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(getDataLancamento().getTime());
+    }
+
+    public String getCSV() {
+        return String.format("%s,%s,%s,%b", getNome(), getDataFormatada(), getUrlImage(), isFavorito());
     }
 
     @Override
