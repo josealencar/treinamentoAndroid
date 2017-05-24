@@ -3,4 +3,7 @@
     <string name="num_pokemon">Digite o número do pokémon</string>
     <string name="search">Pesquisar</string>
     <string name="init_text">Pesquise um Pokémon</string>
+    <string name="error_search">Pokémon não encontrado</string>
+    <string name="network_unnavailable">Conexão com a rede indisponível</string>
+    <string name="invalid_number">Número informado inválido</string>
 </resources>

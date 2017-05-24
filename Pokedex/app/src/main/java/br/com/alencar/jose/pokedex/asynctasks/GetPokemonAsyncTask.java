@@ -16,6 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import br.com.alencar.jose.pokedex.MainActivity;
+import br.com.alencar.jose.pokedex.R;
 
 /**
  * Created by jose on 24/05/17.
@@ -74,6 +75,7 @@ public class GetPokemonAsyncTask extends AsyncTask<Integer, Void, JSONObject> {
         try {
             nome = jsonObject.getString("name");
         } catch (JSONException | NullPointerException e) {
+            nome = activity.getResources().getString(R.string.error_search);
             Log.e(TAG_GET_POKEMON, e.getMessage(), e);
         }
         activity.renderizarNome(nome);
