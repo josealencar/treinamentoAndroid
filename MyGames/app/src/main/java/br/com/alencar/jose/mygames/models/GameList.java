@@ -111,4 +111,8 @@ public class GameList {
 
         return builder.toString();
     }
+
+    public Game getItem(int position) {
+        return games.get(position);
+    }
 }
