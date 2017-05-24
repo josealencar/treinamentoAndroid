@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 gameList.remove(position);
                 adapter.notifyDataSetChanged();
-                return false;
+                return true;
             }
         });
         super.onResume();
