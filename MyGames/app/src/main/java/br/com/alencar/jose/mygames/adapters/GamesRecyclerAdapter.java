@@ -4,7 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
 
         holder.tvNome.setText(game.getNome());
         holder.tvData.setText(game.getDataFormatada());
+        Picasso.with(holder.itemView.getContext()).load(game.getUrlImage()).into(holder.ivCard);
     }
 
     @Override
@@ -46,11 +50,13 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
     protected class ViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView tvNome, tvData;
+        protected ImageView ivCard;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNome = (TextView) itemView.findViewById(R.id.tv_name);
             tvData = (TextView) itemView.findViewById(R.id.tv_date);
+            ivCard = (ImageView) itemView.findViewById(R.id.iv_card);
 
             itemView.setOnClickListener((MainActivity)itemView.getContext());
             itemView.setOnLongClickListener((MainActivity)itemView.getContext());

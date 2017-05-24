@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="GamesCard">
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">2dp</item>
+        <item name="contentPadding">8dp</item>
+        <item name="android:background">@color/cardview_dark_background</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+    </style>
+
 </resources>
