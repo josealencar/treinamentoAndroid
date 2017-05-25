@@ -3,6 +3,7 @@ package br.com.alencar.jose.pokedex.asynctasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,9 +15,13 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.alencar.jose.pokedex.MainActivity;
 import br.com.alencar.jose.pokedex.R;
+import br.com.alencar.jose.pokedex.models.Estatistica;
+import br.com.alencar.jose.pokedex.models.Pokemon;
 
 /**
  * Created by jose on 24/05/17.
@@ -71,13 +76,43 @@ public class GetPokemonAsyncTask extends AsyncTask<Integer, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
-        String nome = null;
+        String nome, sprite, descricao;
+        Integer id, altura, valor;
+        Double peso;
+        List<String> tipos = null;
+        List<Estatistica> estatisticas = null;
+
         try {
             nome = jsonObject.getString("name");
+            sprite = jsonObject.getJSONObject("sprites").getString("front_default");
+            id = jsonObject.getInt("id");
+            peso = jsonObject.getDouble("weight") / 1000;
+            altura = jsonObject.getInt("height") * 10;
+
+            JSONArray stats = jsonObject.getJSONArray("stats");
+
+            estatisticas = new ArrayList<>();
+            for (int i=0; i < stats.length(); i++) {
+                descricao = stats.getJSONObject(i).getJSONObject("stat").getString("name");
+                valor = stats.getJSONObject(i).getInt("base_stat");
+
+                Estatistica estatistica = new Estatistica(descricao, valor);
+                estatisticas.add(estatistica);
+            }
+
+            JSONArray types = jsonObject.getJSONArray("types");
+
+            tipos = new ArrayList<>();
+            for (int j=0; j < types.length(); j++) {
+                tipos.add(types.getJSONObject(j).getJSONObject("type").getString("name"));
+            }
+
+            Pokemon pokemon = new Pokemon(id, nome, sprite, altura, peso, tipos, estatisticas);
+
+            activity.popularPokemon(pokemon);
         } catch (JSONException | NullPointerException e) {
-            nome = activity.getResources().getString(R.string.error_search);
+            activity.atualizarMensagem(activity.getResources().getString(R.string.error_search));
             Log.e(TAG_GET_POKEMON, e.getMessage(), e);
         }
-        activity.renderizarNome(nome);
     }
 }

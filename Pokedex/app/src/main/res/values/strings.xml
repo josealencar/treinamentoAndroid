@@ -6,4 +6,10 @@
     <string name="error_search">Pokémon não encontrado</string>
     <string name="network_unnavailable">Conexão com a rede indisponível</string>
     <string name="invalid_number">Número informado inválido</string>
+    <string name="base_id_text">ID:</string>
+    <string name="base_name_pokemon">Nome:</string>
+    <string name="base_height_pokemon">Altura (cm):</string>
+    <string name="base_weight_pokemon">Peso (kg):</string>
+    <string name="content_image_view">Imagem do Pokémon pesquisado</string>
+    <string name="base_types_pokemon">Tipos:</string>
 </resources>
