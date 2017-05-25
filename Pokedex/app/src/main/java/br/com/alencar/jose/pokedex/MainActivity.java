@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.alencar.jose.pokedex.asynctasks.GetPokemonAsyncTask;
+import br.com.alencar.jose.pokedex.models.Estatistica;
 import br.com.alencar.jose.pokedex.models.Pokemon;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_MAIN = "TAG_MAIN";
     private TextView tvNome, tvIdPokemon, tvNomePokemon, tvAlturaPokemon, tvPesoPokemon, tvTypesPokemon;
     private EditText etNumber;
-    private ProgressBar spinner;
+    private ProgressBar spinner, pbSpeed, pbSpecialDefense, pbSpecialAttack, pbDefense, pbAttack, pbHp;
 
     private CardView cvPokemon;
     private ImageView ivPokemon;
@@ -48,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         tvTypesPokemon = (TextView) findViewById(R.id.tv_types_pokemon);
         cvPokemon = (CardView) findViewById(R.id.cv_pokemon);
         ivPokemon = (ImageView) findViewById(R.id.iv_pokemon);
+        pbSpeed = (ProgressBar) findViewById(R.id.pb_speed);
+        pbSpecialDefense = (ProgressBar) findViewById(R.id.pb_special_defense);
+        pbSpecialAttack = (ProgressBar) findViewById(R.id.pb_special_attack);
+        pbDefense = (ProgressBar) findViewById(R.id.pb_defense);
+        pbAttack = (ProgressBar) findViewById(R.id.pb_attack);
+        pbHp = (ProgressBar) findViewById(R.id.pb_hp);
     }
 
     public void atualizarMensagem(String mensagem) {
@@ -95,6 +102,31 @@ public class MainActivity extends AppCompatActivity {
         tvPesoPokemon.setText(String.format("%s %.3f", getStringResources(R.string.base_weight_pokemon), pokemon.getPeso()).replace(".", ","));
         tvAlturaPokemon.setText(montaString(R.string.base_height_pokemon, String.valueOf(pokemon.getAltura())));
         tvTypesPokemon.setText(montaString(R.string.base_types_pokemon, concatenaTipos(pokemon.getTipos())));
+
+        for (Estatistica estatistica : pokemon.getEstatisticas()) {
+            switch (estatistica.getDescricao()) {
+                case "speed":
+                    pbSpeed.setProgress(estatistica.getValor());
+                    break;
+                case "special-defense":
+                    pbSpecialDefense.setProgress(estatistica.getValor());
+                    break;
+                case "special-attack":
+                    pbSpecialAttack.setProgress(estatistica.getValor());
+                    break;
+                case "defense":
+                    pbDefense.setProgress(estatistica.getValor());
+                    break;
+                case "attack":
+                    pbAttack.setProgress(estatistica.getValor());
+                    break;
+                case "hp":
+                    pbHp.setProgress(estatistica.getValor());
+                    break;
+                default:
+                    break;
+            }
+        }
         esconderSpinner();
         cvPokemon.setVisibility(View.VISIBLE);
     }

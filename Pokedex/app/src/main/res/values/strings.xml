@@ -12,4 +12,11 @@
     <string name="base_weight_pokemon">Peso (kg):</string>
     <string name="content_image_view">Imagem do Pokémon pesquisado</string>
     <string name="base_types_pokemon">Tipos:</string>
+    <string name="txt_speed">Velocidade</string>
+    <string name="txt_estatisticas">Estatísticas:</string>
+    <string name="txt_special_defense">Defesa Especial</string>
+    <string name="txt_special_attack">Ataque Especial</string>
+    <string name="txt_defense">Defesa</string>
+    <string name="txt_attack">Ataque</string>
+    <string name="txt_hp">Vida</string>
 </resources>
