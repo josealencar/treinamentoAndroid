@@ -5,10 +5,12 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -35,11 +37,14 @@ public class MainActivity extends AppCompatActivity {
     private EditText etNumber;
     private ProgressBar spinner;
     private RoundCornerProgressBar pbSpeed, pbSpecialDefense, pbSpecialAttack, pbDefense, pbAttack, pbHp;
+    private Button btnSearch, btnLuck;
+    private FloatingActionButton btnSync;
 
     private CardView cvPokemon;
     private ImageView ivPokemon;
 
     private Map<Integer, Pokemon> cachePokemons = new HashMap<>();
+    private Integer idShowing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +79,32 @@ public class MainActivity extends AppCompatActivity {
         pbAttack = (RoundCornerProgressBar) findViewById(R.id.pb_attack);
         pbHp = (RoundCornerProgressBar) findViewById(R.id.pb_hp);
 
+        btnSearch = (Button) findViewById(R.id.bt_search);
+        btnLuck = (Button) findViewById(R.id.bt_luck);
+        btnSync = (FloatingActionButton) findViewById(R.id.fab_sync);
+        btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sincronizar(v);
+            }
+        });
+
         ajustaEstiloProgressBar(pbSpeed);
         ajustaEstiloProgressBar(pbSpecialDefense);
         ajustaEstiloProgressBar(pbSpecialAttack);
         ajustaEstiloProgressBar(pbDefense);
         ajustaEstiloProgressBar(pbAttack);
         ajustaEstiloProgressBar(pbHp);
+    }
+
+    public void desabilitaBotoes() {
+        btnSearch.setEnabled(false);
+        btnLuck.setEnabled(false);
+    }
+
+    public void habilitaBotoes() {
+        btnSearch.setEnabled(true);
+        btnLuck.setEnabled(true);
     }
 
     private void ajustaEstiloProgressBar(RoundCornerProgressBar roundCornerProgressBar) {
@@ -118,17 +143,25 @@ public class MainActivity extends AppCompatActivity {
         buscarPokemon(number+1);
     }
 
-    private void buscarPokemon(Integer id) {
+    private void sincronizar(View view) {
+        realizarRequest(idShowing);
+    }
+
+    private void realizarRequest(Integer id) {
         cvPokemon.setVisibility(View.GONE);
         atualizarMensagem(null);
+        if (isNetworkAvailable()) {
+            new GetPokemonAsyncTask(this).execute(id);
+        } else {
+            atualizarMensagem(getResources().getString(R.string.network_unnavailable));
+        }
+    }
+
+    private void buscarPokemon(Integer id) {
         if (cachePokemons.containsKey(id)) {
             popularPokemon(cachePokemons.get(id));
         } else {
-            if (isNetworkAvailable()) {
-                new GetPokemonAsyncTask(this).execute(id);
-            } else {
-                atualizarMensagem(getResources().getString(R.string.network_unnavailable));
-            }
+            realizarRequest(id);
         }
     }
 
@@ -141,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void popularPokemon(Pokemon pokemon) {
         cachePokemons.put(pokemon.getId(), pokemon);
+        idShowing = pokemon.getId();
         Picasso.with(this).load(pokemon.getSprite()).into(ivPokemon);
         //tvIdPokemon.setText(montaString(R.string.base_id_text, String.valueOf(pokemon.getId())));
         tvNomePokemon.setText(String.format("%s #%d", montaString(R.string.base_name_pokemon, pokemon.getNome()), pokemon.getId()));

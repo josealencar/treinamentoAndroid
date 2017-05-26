@@ -39,6 +39,7 @@ public class GetPokemonAsyncTask extends AsyncTask<Integer, Void, JSONObject> {
 
     @Override
     protected void onPreExecute() {
+        activity.desabilitaBotoes();
         activity.mostrarSpinner();
     }
 
@@ -76,6 +77,7 @@ public class GetPokemonAsyncTask extends AsyncTask<Integer, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
+        activity.habilitaBotoes();
         String nome, sprite, descricao;
         Integer id, altura, valor;
         Double peso;
