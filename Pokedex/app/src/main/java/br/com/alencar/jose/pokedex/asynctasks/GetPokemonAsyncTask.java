@@ -86,8 +86,8 @@ public class GetPokemonAsyncTask extends AsyncTask<Integer, Void, JSONObject> {
             nome = jsonObject.getString("name");
             sprite = jsonObject.getJSONObject("sprites").getString("front_default");
             id = jsonObject.getInt("id");
-            peso = jsonObject.getDouble("weight") / 1000;
-            altura = jsonObject.getInt("height") * 10;
+            peso = jsonObject.getDouble("weight") / 10;
+            altura = jsonObject.getInt("height") * 100;
 
             JSONArray stats = jsonObject.getJSONArray("stats");
 
