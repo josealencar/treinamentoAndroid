@@ -4,8 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +17,10 @@ import android.widget.TextView;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import br.com.alencar.jose.pokedex.asynctasks.GetPokemonAsyncTask;
 import br.com.alencar.jose.pokedex.models.Estatistica;
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView cvPokemon;
     private ImageView ivPokemon;
 
-    private Pokemon lastPokemon;
+    private Map<Integer, Pokemon> cachePokemons = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,25 +102,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pesquisar(View view) {
-        atualizarMensagem(null);
-        cvPokemon.setVisibility(View.GONE);
-        if (isNetworkAvailable()) {
-            try {
-                Integer number = Integer.parseInt(etNumber.getText().toString());
-                etNumber.setText(null);
-                if (lastPokemon != null && number.equals(lastPokemon.getId())) {
-                    popularPokemon(lastPokemon);
-                } else {
-                    new GetPokemonAsyncTask(this).execute(number);
-                }
-            } catch (NumberFormatException nfe) {
-                Log.e(TAG_MAIN, nfe.getMessage(), nfe);
-                atualizarMensagem(getResources().getString(R.string.invalid_number));
-            }
-        } else {
-            atualizarMensagem(getResources().getString(R.string.network_unnavailable));
+        try {
+            Integer number = Integer.parseInt(etNumber.getText().toString());
+            etNumber.setText(null);
+            buscarPokemon(number);
+        } catch (NumberFormatException nfe) {
+            Log.e(TAG_MAIN, nfe.getMessage(), nfe);
+            atualizarMensagem(getResources().getString(R.string.invalid_number));
         }
+    }
 
+    public void sortear(View view) {
+        Random random = new Random();
+        int number = random.nextInt(721);
+        buscarPokemon(number+1);
+    }
+
+    private void buscarPokemon(Integer id) {
+        cvPokemon.setVisibility(View.GONE);
+        atualizarMensagem(null);
+        if (cachePokemons.containsKey(id)) {
+            popularPokemon(cachePokemons.get(id));
+        } else {
+            if (isNetworkAvailable()) {
+                new GetPokemonAsyncTask(this).execute(id);
+            } else {
+                atualizarMensagem(getResources().getString(R.string.network_unnavailable));
+            }
+        }
     }
 
     private boolean isNetworkAvailable() {
@@ -128,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void popularPokemon(Pokemon pokemon) {
-        lastPokemon = pokemon;
+        cachePokemons.put(pokemon.getId(), pokemon);
         Picasso.with(this).load(pokemon.getSprite()).into(ivPokemon);
         //tvIdPokemon.setText(montaString(R.string.base_id_text, String.valueOf(pokemon.getId())));
         tvNomePokemon.setText(String.format("%s #%d", montaString(R.string.base_name_pokemon, pokemon.getNome()), pokemon.getId()));
