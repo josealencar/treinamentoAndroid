@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/num_pokemon"
         android:inputType="number"
+        android:imeOptions="actionDone"
         tools:layout_editor_absoluteX="8dp" />
     <Button
         android:id="@+id/bt_search"
@@ -21,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/search"
+        android:background="@color/btnColor"
         android:onClick="pesquisar"/>
 
     <ProgressBar
@@ -60,30 +62,30 @@
                 android:id="@+id/tv_nome_pokemon"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:text="@string/base_name_pokemon"/>
             <TextView
                 android:id="@+id/tv_altura_pokemon"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:text="@string/base_height_pokemon"/>
             <TextView
                 android:id="@+id/tv_peso_pokemon"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:text="@string/base_weight_pokemon"/>
             <TextView
                 android:id="@+id/tv_types_pokemon"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:text="@string/base_types_pokemon"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="2"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -129,11 +131,20 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="18dp"/>
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                        android:id="@+id/pb_speed"
-                        android:layout_height="@dimen/height_progress_bar"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        app:rcBackgroundPadding="1dp" />
+                        android:layout_height="@dimen/height_progress_bar">
+                        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            android:id="@+id/pb_speed"
+                            android:layout_height="@dimen/height_progress_bar"
+                            android:layout_width="match_parent"
+                            app:rcBackgroundPadding="1dp" />
+                        <TextView
+                            android:background="@color/backgroundValueStats"
+                            android:id="@+id/tv_value_speed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
                     <!--<ProgressBar
                         android:id="@+id/pb_speed"
                         android:layout_width="match_parent"
@@ -142,11 +153,20 @@
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                         />-->
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                        android:id="@+id/pb_special_defense"
-                        android:layout_height="@dimen/height_progress_bar"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        app:rcBackgroundPadding="1dp" />
+                        android:layout_height="@dimen/height_progress_bar">
+                        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            android:id="@+id/pb_special_defense"
+                            android:layout_height="@dimen/height_progress_bar"
+                            android:layout_width="match_parent"
+                            app:rcBackgroundPadding="1dp" />
+                        <TextView
+                            android:background="@color/backgroundValueStats"
+                            android:id="@+id/tv_value_special_defense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
                     <!--<ProgressBar
                         android:id="@+id/pb_special_defense"
                         android:layout_width="match_parent"
@@ -155,11 +175,20 @@
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                         />-->
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                        android:id="@+id/pb_special_attack"
-                        android:layout_height="@dimen/height_progress_bar"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        app:rcBackgroundPadding="1dp" />
+                        android:layout_height="@dimen/height_progress_bar">
+                        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            android:id="@+id/pb_special_attack"
+                            android:layout_height="@dimen/height_progress_bar"
+                            android:layout_width="match_parent"
+                            app:rcBackgroundPadding="1dp" />
+                        <TextView
+                            android:background="@color/backgroundValueStats"
+                            android:id="@+id/tv_value_special_attack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
                     <!--<ProgressBar
                         android:id="@+id/pb_special_attack"
                         android:layout_width="match_parent"
@@ -168,11 +197,20 @@
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                         />-->
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                        android:id="@+id/pb_defense"
-                        android:layout_height="@dimen/height_progress_bar"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        app:rcBackgroundPadding="1dp" />
+                        android:layout_height="@dimen/height_progress_bar">
+                        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            android:id="@+id/pb_defense"
+                            android:layout_height="@dimen/height_progress_bar"
+                            android:layout_width="match_parent"
+                            app:rcBackgroundPadding="1dp" />
+                        <TextView
+                            android:background="@color/backgroundValueStats"
+                            android:id="@+id/tv_value_defense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
                     <!--<ProgressBar
                         android:id="@+id/pb_defense"
                         android:layout_width="match_parent"
@@ -181,11 +219,20 @@
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                         />-->
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                        android:id="@+id/pb_attack"
-                        android:layout_height="@dimen/height_progress_bar"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        app:rcBackgroundPadding="1dp" />
+                        android:layout_height="@dimen/height_progress_bar">
+                        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            android:id="@+id/pb_attack"
+                            android:layout_height="@dimen/height_progress_bar"
+                            android:layout_width="match_parent"
+                            app:rcBackgroundPadding="1dp" />
+                        <TextView
+                            android:background="@color/backgroundValueStats"
+                            android:id="@+id/tv_value_attack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
                     <!--<ProgressBar
                         android:id="@+id/pb_attack"
                         android:layout_width="match_parent"
@@ -194,11 +241,20 @@
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                         />-->
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                        android:id="@+id/pb_hp"
-                        android:layout_height="@dimen/height_progress_bar"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        app:rcBackgroundPadding="1dp" />
+                        android:layout_height="@dimen/height_progress_bar">
+                        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            android:id="@+id/pb_hp"
+                            android:layout_height="@dimen/height_progress_bar"
+                            android:layout_width="match_parent"
+                            app:rcBackgroundPadding="1dp" />
+                        <TextView
+                            android:background="@color/backgroundValueStats"
+                            android:id="@+id/tv_value_hp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
                     <!--<ProgressBar
                         android:id="@+id/pb_hp"
                         android:layout_width="match_parent"
@@ -213,7 +269,7 @@
                 android:id="@+id/iv_pokemon"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_weight="4"
+                android:layout_weight="2"
                 android:contentDescription="@string/content_image_view"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>

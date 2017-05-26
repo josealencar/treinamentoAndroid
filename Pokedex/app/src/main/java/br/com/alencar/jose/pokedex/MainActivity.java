@@ -28,13 +28,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_MAIN = "TAG_MAIN";
     private static final String COLOR_WHITE = "#ffffff";
     private static final String COLOR_CYAN = "#01baef";
-    private TextView tvNome, tvNomePokemon, tvAlturaPokemon, tvPesoPokemon, tvTypesPokemon;
+    private TextView tvNome, tvNomePokemon, tvAlturaPokemon, tvPesoPokemon, tvTypesPokemon, tvValueSpeed, tvValueSpecialDefense, tvValueSpecialAttack, tvValueDefense, tvValueAttack, tvValueHp;
     private EditText etNumber;
     private ProgressBar spinner;
     private RoundCornerProgressBar pbSpeed, pbSpecialDefense, pbSpecialAttack, pbDefense, pbAttack, pbHp;
 
     private CardView cvPokemon;
     private ImageView ivPokemon;
+
+    private Pokemon lastPokemon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
         tvAlturaPokemon = (TextView) findViewById(R.id.tv_altura_pokemon);
         tvPesoPokemon = (TextView) findViewById(R.id.tv_peso_pokemon);
         tvTypesPokemon = (TextView) findViewById(R.id.tv_types_pokemon);
+
+        tvValueSpeed = (TextView) findViewById(R.id.tv_value_speed);
+        tvValueSpecialDefense = (TextView) findViewById(R.id.tv_value_special_defense);
+        tvValueSpecialAttack = (TextView) findViewById(R.id.tv_value_special_attack);
+        tvValueDefense = (TextView) findViewById(R.id.tv_value_defense);
+        tvValueAttack = (TextView) findViewById(R.id.tv_value_attack);
+        tvValueHp = (TextView) findViewById(R.id.tv_value_hp);
+
         cvPokemon = (CardView) findViewById(R.id.cv_pokemon);
         ivPokemon = (ImageView) findViewById(R.id.iv_pokemon);
         pbSpeed = (RoundCornerProgressBar) findViewById(R.id.pb_speed);
@@ -94,8 +104,12 @@ public class MainActivity extends AppCompatActivity {
         if (isNetworkAvailable()) {
             try {
                 Integer number = Integer.parseInt(etNumber.getText().toString());
-                new GetPokemonAsyncTask(this).execute(number);
                 etNumber.setText(null);
+                if (lastPokemon != null && number.equals(lastPokemon.getId())) {
+                    popularPokemon(lastPokemon);
+                } else {
+                    new GetPokemonAsyncTask(this).execute(number);
+                }
             } catch (NumberFormatException nfe) {
                 Log.e(TAG_MAIN, nfe.getMessage(), nfe);
                 atualizarMensagem(getResources().getString(R.string.invalid_number));
@@ -114,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void popularPokemon(Pokemon pokemon) {
+        lastPokemon = pokemon;
         Picasso.with(this).load(pokemon.getSprite()).into(ivPokemon);
         //tvIdPokemon.setText(montaString(R.string.base_id_text, String.valueOf(pokemon.getId())));
         tvNomePokemon.setText(String.format("%s #%d", montaString(R.string.base_name_pokemon, pokemon.getNome()), pokemon.getId()));
@@ -125,21 +140,27 @@ public class MainActivity extends AppCompatActivity {
             switch (estatistica.getDescricao()) {
                 case "speed":
                     pbSpeed.setProgress(estatistica.getValor());
+                    tvValueSpeed.setText(String.valueOf(estatistica.getValor()));
                     break;
                 case "special-defense":
                     pbSpecialDefense.setProgress(estatistica.getValor());
+                    tvValueSpecialDefense.setText(String.valueOf(estatistica.getValor()));
                     break;
                 case "special-attack":
                     pbSpecialAttack.setProgress(estatistica.getValor());
+                    tvValueSpecialAttack.setText(String.valueOf(estatistica.getValor()));
                     break;
                 case "defense":
                     pbDefense.setProgress(estatistica.getValor());
+                    tvValueDefense.setText(String.valueOf(estatistica.getValor()));
                     break;
                 case "attack":
                     pbAttack.setProgress(estatistica.getValor());
+                    tvValueAttack.setText(String.valueOf(estatistica.getValor()));
                     break;
                 case "hp":
                     pbHp.setProgress(estatistica.getValor());
+                    tvValueHp.setText(String.valueOf(estatistica.getValor()));
                     break;
                 default:
                     break;

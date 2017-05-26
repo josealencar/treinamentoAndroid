@@ -84,6 +84,7 @@ public class GetPokemonAsyncTask extends AsyncTask<Integer, Void, JSONObject> {
 
         try {
             nome = jsonObject.getString("name");
+            nome = nome.substring(0,1).toUpperCase() + nome.substring(1);
             sprite = jsonObject.getJSONObject("sprites").getString("front_default");
             id = jsonObject.getInt("id");
             peso = jsonObject.getDouble("weight") / 10;
@@ -104,7 +105,8 @@ public class GetPokemonAsyncTask extends AsyncTask<Integer, Void, JSONObject> {
 
             tipos = new ArrayList<>();
             for (int j=0; j < types.length(); j++) {
-                tipos.add(types.getJSONObject(j).getJSONObject("type").getString("name"));
+                String tipo = types.getJSONObject(j).getJSONObject("type").getString("name");
+                tipos.add(tipo.substring(0, 1).toUpperCase() + tipo.substring(1));
             }
 
             Pokemon pokemon = new Pokemon(id, nome, sprite, altura, peso, tipos, estatisticas);
