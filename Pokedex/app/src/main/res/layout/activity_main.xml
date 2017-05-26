@@ -43,18 +43,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/spinner"
+        android:padding="@dimen/default_padding"
         android:visibility="gone">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="top"
             android:orientation="vertical">
-            <TextView
+            <!--<TextView
                 android:id="@+id/tv_id_pokemon"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:text="@string/base_id_text"
-                android:layout_weight="1"/>
+                android:layout_weight="1"/> -->
             <TextView
                 android:id="@+id/tv_nome_pokemon"
                 android:layout_width="match_parent"
@@ -91,39 +92,32 @@
                     android:gravity="end">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="18dp"
                         android:text="@string/txt_estatisticas"
                         android:layout_gravity="start"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="@dimen/height_progress_bar"
                         android:text="@string/txt_speed"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="@dimen/height_progress_bar"
                         android:text="@string/txt_special_defense"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="@dimen/height_progress_bar"
                         android:text="@string/txt_special_attack"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="15dp"
                         android:text="@string/txt_defense"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="@dimen/height_progress_bar"
                         android:text="@string/txt_attack"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="@dimen/height_progress_bar"
                         android:text="@string/txt_hp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -134,56 +128,85 @@
                     android:paddingRight="@dimen/default_padding">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
-                    <ProgressBar
+                        android:layout_height="18dp"/>
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                        android:id="@+id/pb_speed"
+                        android:layout_height="@dimen/height_progress_bar"
+                        android:layout_width="match_parent"
+                        app:rcBackgroundPadding="1dp" />
+                    <!--<ProgressBar
                         android:id="@+id/pb_speed"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                        />
-                    <ProgressBar
+                        />-->
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                        android:id="@+id/pb_special_defense"
+                        android:layout_height="@dimen/height_progress_bar"
+                        android:layout_width="match_parent"
+                        app:rcBackgroundPadding="1dp" />
+                    <!--<ProgressBar
                         android:id="@+id/pb_special_defense"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                        />
-                    <ProgressBar
+                        />-->
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                        android:id="@+id/pb_special_attack"
+                        android:layout_height="@dimen/height_progress_bar"
+                        android:layout_width="match_parent"
+                        app:rcBackgroundPadding="1dp" />
+                    <!--<ProgressBar
                         android:id="@+id/pb_special_attack"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                        />
-                    <ProgressBar
+                        />-->
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                        android:id="@+id/pb_defense"
+                        android:layout_height="@dimen/height_progress_bar"
+                        android:layout_width="match_parent"
+                        app:rcBackgroundPadding="1dp" />
+                    <!--<ProgressBar
                         android:id="@+id/pb_defense"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                        />
-                    <ProgressBar
+                        />-->
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                        android:id="@+id/pb_attack"
+                        android:layout_height="@dimen/height_progress_bar"
+                        android:layout_width="match_parent"
+                        app:rcBackgroundPadding="1dp" />
+                    <!--<ProgressBar
                         android:id="@+id/pb_attack"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                        />
-                    <ProgressBar
+                        />-->
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                        android:id="@+id/pb_hp"
+                        android:layout_height="@dimen/height_progress_bar"
+                        android:layout_width="match_parent"
+                        app:rcBackgroundPadding="1dp" />
+                    <!--<ProgressBar
                         android:id="@+id/pb_hp"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:max="180"
                         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                        />
+                        />-->
                 </LinearLayout>
             </LinearLayout>
             <ImageView

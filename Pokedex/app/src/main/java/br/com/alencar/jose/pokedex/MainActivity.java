@@ -1,6 +1,7 @@
 package br.com.alencar.jose.pokedex;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,9 +26,12 @@ import br.com.alencar.jose.pokedex.models.Pokemon;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG_MAIN = "TAG_MAIN";
-    private TextView tvNome, tvIdPokemon, tvNomePokemon, tvAlturaPokemon, tvPesoPokemon, tvTypesPokemon;
+    private static final String COLOR_WHITE = "#ffffff";
+    private static final String COLOR_CYAN = "#01baef";
+    private TextView tvNome, tvNomePokemon, tvAlturaPokemon, tvPesoPokemon, tvTypesPokemon;
     private EditText etNumber;
-    private ProgressBar spinner, pbSpeed, pbSpecialDefense, pbSpecialAttack, pbDefense, pbAttack, pbHp;
+    private ProgressBar spinner;
+    private RoundCornerProgressBar pbSpeed, pbSpecialDefense, pbSpecialAttack, pbDefense, pbAttack, pbHp;
 
     private CardView cvPokemon;
     private ImageView ivPokemon;
@@ -42,19 +47,32 @@ public class MainActivity extends AppCompatActivity {
         tvNome = (TextView) findViewById(R.id.tv_nome);
         etNumber = (EditText) findViewById(R.id.et_number);
         spinner = (ProgressBar) findViewById(R.id.spinner);
-        tvIdPokemon = (TextView) findViewById(R.id.tv_id_pokemon);
+        //tvIdPokemon = (TextView) findViewById(R.id.tv_id_pokemon);
         tvNomePokemon = (TextView) findViewById(R.id.tv_nome_pokemon);
         tvAlturaPokemon = (TextView) findViewById(R.id.tv_altura_pokemon);
         tvPesoPokemon = (TextView) findViewById(R.id.tv_peso_pokemon);
         tvTypesPokemon = (TextView) findViewById(R.id.tv_types_pokemon);
         cvPokemon = (CardView) findViewById(R.id.cv_pokemon);
         ivPokemon = (ImageView) findViewById(R.id.iv_pokemon);
-        pbSpeed = (ProgressBar) findViewById(R.id.pb_speed);
-        pbSpecialDefense = (ProgressBar) findViewById(R.id.pb_special_defense);
-        pbSpecialAttack = (ProgressBar) findViewById(R.id.pb_special_attack);
-        pbDefense = (ProgressBar) findViewById(R.id.pb_defense);
-        pbAttack = (ProgressBar) findViewById(R.id.pb_attack);
-        pbHp = (ProgressBar) findViewById(R.id.pb_hp);
+        pbSpeed = (RoundCornerProgressBar) findViewById(R.id.pb_speed);
+        pbSpecialDefense = (RoundCornerProgressBar) findViewById(R.id.pb_special_defense);
+        pbSpecialAttack = (RoundCornerProgressBar) findViewById(R.id.pb_special_attack);
+        pbDefense = (RoundCornerProgressBar) findViewById(R.id.pb_defense);
+        pbAttack = (RoundCornerProgressBar) findViewById(R.id.pb_attack);
+        pbHp = (RoundCornerProgressBar) findViewById(R.id.pb_hp);
+
+        ajustaEstiloProgressBar(pbSpeed);
+        ajustaEstiloProgressBar(pbSpecialDefense);
+        ajustaEstiloProgressBar(pbSpecialAttack);
+        ajustaEstiloProgressBar(pbDefense);
+        ajustaEstiloProgressBar(pbAttack);
+        ajustaEstiloProgressBar(pbHp);
+    }
+
+    private void ajustaEstiloProgressBar(RoundCornerProgressBar roundCornerProgressBar) {
+        roundCornerProgressBar.setProgressColor(Color.parseColor(COLOR_CYAN));
+        roundCornerProgressBar.setProgressBackgroundColor(Color.parseColor(COLOR_WHITE));
+        roundCornerProgressBar.setMax(200);
     }
 
     public void atualizarMensagem(String mensagem) {
@@ -97,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void popularPokemon(Pokemon pokemon) {
         Picasso.with(this).load(pokemon.getSprite()).into(ivPokemon);
-        tvIdPokemon.setText(montaString(R.string.base_id_text, String.valueOf(pokemon.getId())));
-        tvNomePokemon.setText(montaString(R.string.base_name_pokemon, pokemon.getNome()));
+        //tvIdPokemon.setText(montaString(R.string.base_id_text, String.valueOf(pokemon.getId())));
+        tvNomePokemon.setText(String.format("%s #%d", montaString(R.string.base_name_pokemon, pokemon.getNome()), pokemon.getId()));
         tvPesoPokemon.setText(String.format("%s %.3f", getStringResources(R.string.base_weight_pokemon), pokemon.getPeso()).replace(".", ","));
         tvAlturaPokemon.setText(montaString(R.string.base_height_pokemon, String.valueOf(pokemon.getAltura())));
         tvTypesPokemon.setText(montaString(R.string.base_types_pokemon, concatenaTipos(pokemon.getTipos())));
